@@ -1,0 +1,16 @@
+my-vue-project/
+├── node_modules/     # 项目依赖包
+├── public/           # 静态资源目录（不经过打包处理）
+├── src/              # 项目源代码目录
+│   ├── assets/       # 静态资源（会经过打包处理）
+│   ├── components/   # 公共组件
+│   ├── router/       # 路由配置（Vue Router）
+│   ├── stores/       # 状态管理（Pinia/Vuex）
+│   ├── views/        # 页面级组件
+│   ├── App.vue       # 根组件
+│   ├── main.js       # 应用入口文件
+│   └── style/        # 全局样式
+├── .gitignore        # Git 忽略配置
+├── package.json      # 项目配置和依赖
+├── README.md         # 项目说明
+└── vite.config.js    # Vite 配置（或 vue.config.js 如果是 Vue CLI）

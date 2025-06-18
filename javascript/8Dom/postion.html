@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            border: 10px green dashed;
+            margin: 10px;
+        }
+        div{
+            min-width: 50px;
+            width: 500px;
+            height: 200px;
+            border: 10px black dashed;
+            padding: 10px;
+            background: dimgray;
+            margin: 10px;
+            overflow: auto;
+        }
+        p{
+            width: 200px;
+            height: 150px;
+            border: 10px red dashed;
+            padding: 10px;
+            margin: 10px;
+            overflow: auto;
+        }
+        .info{
+            width: 500px;
+            margin: 0;
+            position: fixed;
+            left: auto;
+            right: 0;
+        }
+        .windowInfo{
+            height: 100px;
+            top: 0;
+        }
+        .rectInfo{
+            height: 150px;
+            top: 150px;
+        }
+        .offsetInfo{
+            height: 150px;
+            top: 350px;
+        }
+        .clientInfo{
+            height: 100px;
+            top: 550px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="div1">1</div>
+    <div id="div2">2</div>
+    <p id="p1">
+        ssssss ssssss ssssss ssssss
+        ssssss ssssss ssssss ssssss
+        ssssss ssssss ssssss ssssss
+        ssssss ssssss ssssss ssssss
+        ssssss ssssss ssssss ssssss
+        ssssss ssssss ssssss ssssss
+        ssssss ssssss ssssss ssssss
+        ssssss ssssss ssssss ssssss
+        ssssss ssssss ssssss ssssss
+        ssssss ssssss ssssss ssssss
+        ssssss ssssss ssssss ssssss
+        ssssss ssssss ssssss ssssss
+    </p>
+    <div id="div3">3</div>
+    <div id="div4">4</div>
+    <p id="div5" class="info windowInfo">windowInfo</p>
+    <p id="div6" class="info rectInfo">rectInfo</p>
+<!--    <p id="div7" class="info offsetInfo">offsetInfo</p>-->
+<!--    <p id="div8" class="info clientInfo">clientInfo</p>-->
+    <script>
+        let windowInfo = document.querySelector('.windowInfo');
+        let rectInfo = document.querySelector('.rectInfo');
+        let divs = document.querySelectorAll('div');
+
+        document.body.onscroll=()=>{
+            windowInfo.innerHTML=`
+                <br>
+                screen
+                <br>
+                (${window.screenX},${window.screenY}) screen(X,Y) 浏览器左上角相对于屏幕左上角
+                <br>
+                (${window.screenLeft},${window.screenTop}) screen(Left,Top)
+                <br>
+                (${window.screen.width},${window.screen.height}) screen(width,height) 屏幕大小
+                <br>
+                window
+                <br>
+                (${window.innerWidth},${window.innerHeight}) inner(width,height) 窗口的内部宽度
+                <br>
+                (${window.scrollX},${window.scrollY}) scroll(X,Y)
+                <br>
+            `
+            let rect = rectInfo.getBoundingClientRect();
+            rectInfo.innerHTML=`
+                rectInfo 元素相对窗口左上角位置和大小
+                <br>
+                (${rect.x},${rect.y}) rect(X,Y)
+                <br>
+                (${rect.width},${rect.height}) rect(width,height)
+                <br>
+                (${rect.left},${rect.top}) rect(left,top)
+                <br>
+                (${rect.right},${rect.bottom}) rect(right,bottom)
+                <br>
+            `
+
+            for (const div of divs) {
+                div.innerHTML=`
+                    scroll
+                    <br>
+                    (${div.scrollLeft},${div.scrollTop}) scroll(left,top)
+                    <br>
+                    (${div.scrollWidth},${div.scrollHeight}) scroll(width,heigh)
+                    <br>
+                    offsetInfo
+                    <br>
+                    (${div.offsetParent}) offsetParent
+                    <br>
+                    (${div.offsetLeft},${div.offsetTop}) offset(left,top)
+                    <br>
+                    (${div.offsetWidth},${div.offsetHeight}) offset(width,heigh)
+                    <br>
+                    clientInfo
+                    <br>
+                    (${div.clientLeft},${div.clientTop}) client(left,top) 基于offset位置
+                    <br>
+                    (${div.clientWidth},${div.clientHeight}) client(width,heigh) 包括padding
+                    <br>
+                `
+            }
+        }
+
+        document.addEventListener("mousemove", (event)=>{
+            console.log(`(${event.clientX},${event.clientY})`)
+        })
+    </script>
+</body>
+</html>

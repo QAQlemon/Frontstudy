@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>grid网格布局</title>
+</head>
+<style>
+    body{
+        border: 10px red dashed;
+        margin:0;
+    }
+    div{
+        /*width: 100px;*/
+        /*height: 100px;*/
+    }
+    .container {
+        position: relative;
+        width: 50%;
+        height: 600px;
+        border: cornflowerblue 10px dashed;
+
+    /*1.设置表格布局*/
+        display: grid;
+
+
+    /*2.template-列宽比例*/
+        /*grid-template-columns: 200px 100px 100px;*/
+        /*grid-template-columns: 50px repeat(2,100px);*/
+        grid-template-columns: repeat(4,100px);
+    /*3.template-行高比例*/
+    /*    grid-template-rows: repeat(2,100px) 50px;*/
+    /*    grid-template-rows: 50px;*/
+
+    /*4.auto-每一项的列宽*/
+    /*   grid-auto-columns: 50px;*/
+    /*5.auto-每一项的行高*/
+        grid-auto-rows: 50px;
+
+        grid-template-areas: ". . item3 item3";
+
+    /*6.间隙*/
+        grid-column-gap: 20px;
+        grid-row-gap: 10px;
+    }
+    .item{
+        border: cyan 10px dashed;
+    }
+    .item:nth-child(1){
+        /*grid-column-start: 1;*/
+        /*grid-column-end: 3;*/
+        /*grid-row-start: 1;*/
+        /*grid-row-end: 2;*/
+    }
+    .item:nth-child(2){
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 2;
+        grid-row-end: 4;
+    }
+    .item:nth-child(3){
+        grid-area: item3;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="item">item1</div>
+        <div class="item">item2</div>
+        <div class="item">item3</div>
+        <div class="item">item4</div>
+        <div class="item">item5</div>
+        <div class="item">item6</div>
+        <div class="item">item7</div>
+    </div>
+
+</body>
+</html>

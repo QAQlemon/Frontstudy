@@ -1,0 +1,39 @@
+状态管理库
+    简介：允许你组件或页面共享状态
+    vuex
+         Vue 之前的官方状态管理库，现在处于维护模式
+    pinia
+        一个拥有组合式 API 的 Vue 状态管理库
+
+pinia
+    核心：state + getter + action
+
+    定义Store
+        api:
+            创建Store
+                defineStore('',{
+                    state:()=>{
+
+                    },
+                    getters:{
+
+                    },
+                    actions:{
+
+                    }
+                })
+                defineStore('',()=>{})
+            使用Store
+                const store = useCounterStore()
+                注：返回reactive对象，不要对store使用解构，解构得到的变量的响应式已被破坏
+            从Store解构
+                const store = useCounterStore()
+
+    State
+
+    Getter
+
+    Action
+
+
+

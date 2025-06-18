@@ -1,0 +1,23 @@
+
+prop逐级透传问题：
+    嵌套过深，导致使用 props 则必须将其沿着组件链逐级传递下去，这会非常麻烦
+
+provide和inject
+    作用：
+        provide为组件后代提供数据
+        inject为组件注入传递链上最近的父组件的值
+    格式：
+        父组件：
+            eg1(为组件后代提供依赖):
+                import { provide } from 'vue'
+                provide(‘注入名','值')
+            eg2(提供全局依赖):
+                import { createApp } from 'vue'
+                const app = createApp({})
+                app.provide(‘注入名','值')
+        子组件：
+            import { inject } from 'vue'
+            const message = inject('message')
+
+
+

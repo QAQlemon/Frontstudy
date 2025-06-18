@@ -1,0 +1,163 @@
+客户端路由
+    简介：
+        在单页应用 (SPA) 中将浏览器的 URL 和用户看到的内容绑定起来
+        用户在应用中浏览不同页面时，URL 会随之更新，但页面不需要从服务器重新加载
+单页应用(SPA)
+    简介:
+        更改 url 地址而无需向后端发送 http 请求，在不刷新整个页面的情况下更新视图
+    2种路由和导航技术：
+        1.History API
+            简介：
+                许开发者直接更改前端路由，也就是更改 url 地址而无需向后端发送 http 请求
+            api:
+                history.pushState(state, title, url)
+                history.replaceState(state, title, url)
+        2.hash模式
+            简介:
+                本质上是修改window.location.href实现的,前端路由的改变依托于锚点
+                补充：锚点在本页进行跳转，href="target",跳转至id=target处
+            api:
+                window.location.hash
+                hashChange事件
+
+Vue Router
+    简介：
+        专门为 Vue.js 应用程序设计的核心插件，主要用于构建单页面应用(SPA)
+    基本使用：
+        1.定义route.js
+            设置路由匹配规则，参考router.js
+        2.注册插件
+            作用：
+                全局注册 RouterView 和 RouterLink 组件。
+                添加全局 $router 和 $route 属性。            注：这个是响应式对象
+                启用 useRouter() 和 useRoute() 组合式函数。  注：这个不是响应式对象
+                触发路由器解析初始路由。
+            eg:
+                const app = createApp(App)
+                app.use(router)
+                app.mount('#app')
+        3.使用<RouterView>和<RouterLink>
+            <RouterView>
+            <RouterLink>    a标签用于控制RouterView渲染,内部会调用router.push()
+
+    动态路由
+        /:param([0-9]*)    自定义正则表达式参数    $route.params.param
+        /:param*+          可重复参数            $route.params.param是个数组
+        /:param?           可选参数
+        sensitive: true    大小写限制
+        strict: true       尾部斜杠限制
+    嵌套路由
+        简介：
+            嵌套的路由会根据路径渲染在父路由指定组件的<RouterView>下
+        eg：
+             {
+                path: '/user',
+                component: User,
+                children: [
+
+                    {
+                        //避免path:/user路径不能渲染<RouterView>
+                        path: '',component: User,
+                    },
+                    {
+                        //以父路由的路径作为子路由路径的根路径
+                        //path:/user/id
+                        path: 'id',component: User,
+
+                        name:''
+                    }
+                ]
+             }
+    命名路由
+        简介：
+            命名路由能够让<RouterLink>直接通过路由名称进行跳转
+        eg:
+            <router-link :to="{ name: 'profile', params: { username: 'erina' } }">
+              User profile
+            </router-link>
+    编程式导航
+        简介：
+
+        api:
+            获取路由：
+                组合式 router = useRouter()
+                      route = useRoute()
+                选项式 this.$router
+                      this.$route
+                模板  $router
+                     $route
+            控制历史前进后退：
+                浏览器原生API：
+                    window.history.pushState()
+                    window.history.replaceState()
+                    window.history.go()
+                vue提供的对应API：
+                    router.push({name:'',params:'',query:'',hash:'#',replace: true})
+                    router.replace({name:'',params:'',query:'',hash:'#',replace: true})
+                    router.back()
+                    router.go(-1)
+    命名视图
+        同一个url能根据名称同时渲染多个 <RouterView>组件
+        eg:
+            {
+                path:'',components: {
+                    //默认组件
+                    default: ERROR
+                    //默认组件名和<RouterView name="">一致
+                    LeftMenu,
+                    //自定义组件名content
+                    content:MainContent
+                },
+            }
+            <RouterView name="content"></RouterView>
+
+    重定向和别名
+        重定向: 是指当用户访问 /home 时，URL 会被 / 替换，然后匹配成 /
+        别名: / 别名为 /home，当用户访问 /home 时，URL 仍然是 /home，但会被匹配为用户正在访问 /
+        eg：
+            { path: '/redirect',
+                alias:['/alias'],
+                children: [
+                    {path: '',redirect: '/namedView'},
+                    {
+                        path: '1',
+                        redirect: path=>{
+                            console.log(path)
+                            return '/namedView/1'
+                        }
+                    },
+                    {path: '2',redirect: {path:'/namedView/2'}},
+                ]
+            },
+
+    路由组件传参
+        设置props:true后，可以让route.params 将被设置为组件的 props
+        eg:
+            1.布尔模式
+                {
+                    path: '/redirect',
+                    props: ture
+                }
+                {
+                    path: '/redirect',
+                    components: [default:A,menu:B]
+                    props: [default:true,menu:true] //注：如果有命名视图需要单独给每个命名视图设置props:true
+                }
+            2.函数模式
+                {
+                    path: '/search',
+                    component: SearchUser,
+                    props: route => ({ query: route.query.q })
+                }
+
+    历史记录模式
+        3种模式：
+            memory模式    createWebHashHistory()      不会有历史记录，这意味着你无法后退或前进
+            Hash模式      createWebHashHistory()      URL会有了一个井号（#）。由于这部分 URL 从未被发送到服务器
+            HTML5模式     createWebHistory()          URL 会看起来很 "正常"
+        const router = createRouter({
+          history: createWebHistory(),
+          routes: [
+            //...
+          ],
+        })

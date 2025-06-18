@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body{
+        border: 10px red dashed;
+        margin:0;
+    }
+    div{
+        /*width: 100px;*/
+        /*height: 500px;*/
+    }
+    .container{
+        position: relative;
+        width: 100%;
+        height: 800px;
+        border: cornflowerblue 10px dashed;
+
+    /*1.指定元素为flex容器*/
+        display: flex;
+    /*2.定义容器内元素的排布方向*/
+        flex-direction: row;
+    /*3.定义项目如果在一条轴线排不下，如何换行，flex 默认不换*/
+    /*    flex-wrap: wrap;*/
+    /*4.flex-direction属性和flex-wrap属性的简写形式*/
+        /*flex-flow: row wrap;*/
+    /*5.定义了项目在 主轴x 上的对齐方式*/
+        justify-content: flex-end;
+    /*6.定义项目在 交叉轴y 上如何对齐*/
+        align-items: flex-start;
+    /*7.定义了多根主轴线x在y轴方向上的对齐方式,一般用于多行整体在Y轴上的对齐方式*/
+    /*    align-content: ;*/
+
+    }
+    .item{
+        border: 10px cyan dashed;
+        width: 250px;
+        /*height: 500px;*/
+    /*1.定义项目的排列顺序,数值越小，排列越靠前*/
+        order: 10;
+    /*2.定义剩余空间的拉伸因子,默认为0，即如果存在剩余空间，也不放大*/
+    /*    flex-grow: 0;*/
+    /*3.定义了项目的缩小比例,默认值1*/
+    /*    flex-shrink: 0;*/
+    /*4.指定了 flex 元素在主轴方向上的初始大小*/
+    /*    flex-basis: 250px;*/
+    /*6.简写(grow shrink basis)方式*/
+        flex: 0 1 250px;
+    /*5.会覆盖已有的 align-items 的值*/
+    /*    align-self: flex-start;*/
+    }
+    /*.item:nth-child(2){*/
+    /*    !*order: 11;*!*/
+    /*    flex-shrink: 1;*/
+    /*    flex-grow: 0;*/
+    /*    align-self: flex-end;*/
+    /*}*/
+</style>
+<body>
+    <!--
+        x主轴
+        y交叉轴
+        剩余空间：父容器的“主轴”上可以被子元素“瓜分”的空间
+        溢出空间：
+    -->
+    <div class="container">
+        <div class="item">
+            flex1<br>
+            aaaaaaaaaaaaaaaa
+            aaaaaaaaaaaaaaaa
+            aaaaaaaaaaaaaaaa
+            aaaaaaaaaaaaaaaa
+            aaaaaaaaaaaaaaaa
+            aaaaaaaaaaaaaaaa
+        </div>
+        <div class="item">
+            flex2<br>
+            aaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaa
+            aaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaa
+            aaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaa
+            aaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaa
+            aaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaa
+            aaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaa
+        </div>
+<!--        <div class="item">flex3</div>-->
+    </div>
+</body>
+</html>

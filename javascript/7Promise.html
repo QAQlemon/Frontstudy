@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    // let promise = Promise.resolve(1);
+    // promise.then((v) => console.log("then"));//2.先微任务队列
+
+    // let promise = Promise.reject('reject');
+    // let promise = new Promise((resolve, reject) => {
+    //     reject('reject')
+    // }).catch(reason => {
+    //     console.log('catch '+reason)
+    // })
+    // window.addEventListener("unhandledrejection",ev => {//
+    //     console.log('event start')
+    //     promise.catch(reason => {
+    //         console.log('event '+reason)
+    //     })
+    //     console.log('event end')
+    // })
+    // setTimeout(()=> {
+    //     console.log('timer start')
+    //     promise.catch(reason => {
+    //         console.log('timer '+reason)
+    //     })
+    //     console.log('timer end')
+    // },1000)
+    //
+    // promise.finally(() => {
+    //     console.log('finally')
+    //     promise.catch(reason => {
+    //         console.log('catch '+reason)
+    //     })
+    // })
+    //
+    // console.log('finished')//1
+</script>
+<script type="module">
+    // async function func(){
+    //     let res=await new Promise(
+    //         resolve => setTimeout(resolve, 10000,'hello')
+    //     );
+    //     return res
+    // }
+    // // let promise = new Promise(
+    // //     resolve => setTimeout(resolve, 10000,'hello')
+    // // );
+    // // 阻塞当前javascript引擎执行，直到promise设置了resolve()
+    // let res=await func()
+    // // let res = await promise;
+    // console.log(res)
+    // console.log('finished')
+</script>
+<script>
+    let p=new Promise((resolve,reject)=>{
+        console.log('promise')//1
+        setTimeout(()=>{
+            console.log('timout exec')//3
+            // resolve('result')
+            reject('reject no reason')
+        },1000)
+    }).then((value,reason)=>{
+        console.log(value)
+        console.log(reason)
+    })
+    console.log('finish')//2
+</script>
+<body>
+
+</body>
+</html>

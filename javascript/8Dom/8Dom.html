@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script defer>
+    console.log('1')
+</script>
+<script>
+    console.log('2')
+    document.addEventListener('DOMContentLoaded',ev => {
+        console.log('DOMContentLoaded')
+    })
+</script>
+<script defer>
+    let p=new Promise((resolve, reject) => {
+        window.setTimeout(resolve,1000,'3')
+    })
+    p.then(value => {
+        console.log(value)
+    })
+</script>
+<script defer>
+
+
+</script>
+<style>
+    body{
+        margin: 5px;
+        border: black 2px dashed;
+    }
+</style>
+<body>回车
+    s1
+    s2
+    <b>b加粗</b>
+    <div id="div1" class="test" data-info="dataset测试">
+        div1
+        <span>hello</span>
+    </div>
+    <div id="div2" addr="自定义属性">
+        div2 start
+        <p>hello</p>
+        <div  class="test">
+            inner div
+        </div>
+        div2 end
+    </div>
+    <input type="time" value="">
+    <button>1</button>
+    <div id="div3" class="test div">
+        class测试
+    </div>
+    <script>
+        // childNode/parentNode包含所有文本(换行和回车)和节点
+        // for (const node of document.body.childNodes) {
+        //     alert(node.nodeType+':'+node.textContent)
+        //     // node.textContent
+        // }
+
+        // child/parent仅表示标签元素
+        // for (const element of document.body.children) {
+        //     alert(element.nodeType+':'+element.textContent)
+        //     element.tagName
+        // }
+
+        // alert(document.body.firstChild.textContent)
+        // alert(document.body.firstElementChild.textContent)
+
+        // alert(document.getElementById('div2').textContent);//仅文本内容
+        // alert(document.getElementById('div2').innerHTML);//带有标签
+
+        // let list = document.body.querySelectorAll('div');
+        // list.forEach(e=>alert(e.textContent))
+
+        // for (let e of document.getElementsByClassName('test')) {
+        //     alert(e.innerHTML)
+        // }
+
+        // alert(document.body.children[0].matches('div'))
+
+        // document.body.innerText+='\n<div>js innerText添加</div>'
+
+        // alert(document.body.outerHTML)
+        // document.body.outerHTML+='\n<div>js outerHTML添加</div>'
+
+        // alert(document.body.firstChild.nodeValue)
+
+        //创建元素节点
+        // let divElement = document.createElement('div');
+        // divElement.innerHTML='sss1'
+        // //将节点添加到dom中 2种方式
+        // // 1.append
+        // // document.body.append(divElement,'<p>str</p>','sss')
+        // // 2.insertAdjacentHTML
+        // document.body.insertAdjacentElement("beforeend",divElement)
+        // //移除节点
+        // setTimeout(()=>{
+        //     divElement.remove()
+        // },2000)
+
+        // let cloneElement = document.getElementById('div1').cloneNode(true);
+        // cloneElement.childNodes[0].textContent+='append'
+        // document.body.append(cloneElement)
+
+        // let element = document.querySelector('#div3');
+        // element.classList.remove('test')
+        // element.style='background-color: red;'
+        // element.style.cssText="background-color: blue;"
+        // element.style.color='white'
+        // element.style.margin='20px'
+        // alert(element.style.cssText)
+
+        // alert(document.body.style.margin)
+        // let computedStyle = getComputedStyle(document.body);
+        // let number = parseInt(computedStyle.margin)+20+'px';
+        // alert(number)
+        // setTimeout(()=>{
+        //     document.body.style.margin=number
+        //     alert("over")
+        // },2000)
+        // window.scrollBy(0,10)
+        // window.scrollTo(0,0)
+    </script>
+</body>
+</html>

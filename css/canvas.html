@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    canvas{
+        /*width: 500px;*/
+        /*height: 500px;*/
+        background: dimgrey;
+    }
+</style>
+<body>
+    <canvas class="canvas2d" width="500" height="500"></canvas>
+    <script>
+        let canvas2d = document.querySelector('.canvas2d');
+        let context = canvas2d.getContext("2d");
+
+        context.strokeStyle='#ffffff'
+
+        //1.直线-闭合成三角形
+        context.beginPath();
+        context.moveTo(0,0)
+        context.lineTo(100,100)
+        context.lineTo(200,100)
+        context.closePath()
+        context.fill()
+        context.stroke()
+
+        //2.矩形
+        context.beginPath()
+        context.rect(50,100,50,100)
+        context.fillStyle='#65e2de'
+        context.fill()
+
+        //3.圆形
+        context.beginPath()
+        context.arc(100,200,50,0,Math.PI)
+        context.fillStyle='#328ec8'
+        context.fill()
+
+
+        //4.贝塞尔曲线
+        // 1次
+        context.moveTo(100,300)
+        context.quadraticCurveTo(120,200,200,300)
+        context.stroke()
+
+        canvas2d.addEventListener("mousemove",(event)=>{
+            let posX = event.x-canvas2d.offsetLeft;
+            let posY = event.clientY-canvas2d.offsetTop;
+            // context.clear()
+            context.moveTo(100,300)
+            context.quadraticCurveTo(posX,posY,200,300)
+            context.stroke()
+        })
+        // 2次
+        // context.bezierCurveTo()
+
+        //5.文本
+        context.font
+        context.fillText("hello world 1",0,400,500)
+        context.strokeText("hello world 2",0,450,500)
+
+        //6.图片
+        // let img = new Image();
+        // img.onload=function (){
+        //     context.drawImage(img,0,0)
+        // }
+        // img.src='xxx.png'
+        // 以某个大小显示图片
+        // context.drawImage(img,x,y,width,height)
+        // 显示图片的部分区域，4-裁剪范围 4-放置范围
+        // context.drawImage(img,sx,sy,sWidth,sHeight,dx,dy,dWidth,dHeight)
+
+        //7.样式
+        // 填充样式
+        // context.fillStyle
+        // 轮廓样式
+        // context.strokeStyle
+
+        //8.存档
+        context.save()
+        context.restore()//恢复到之前的存档点
+
+        //9.变形操作
+        context.translate(x,y)//移动坐标系
+        context.rotate(angel)//旋转坐标系
+        context.scale()//旋转坐标系
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

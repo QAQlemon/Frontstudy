@@ -1,0 +1,19 @@
+
+补充：
+    package.json文件
+        简介：Node.js 项目管理的核心文件，定义了这个项目所需要的各种模块，
+             以及项目的配置信息，包括名称、版本、许可证、依赖模块等元数据
+    package-lock文件
+        简介：首次安装依赖包时会创建package-lock.json文件
+             通过 npm install 恢复 已删除node_module下的包 时，提升下载速度，
+             为每个模块及其每个依赖项指定了版本，位置和完整性哈希。
+常用命令：
+    //版本信息
+    node -v
+
+    node xxx.js     运行 Node.js 文件
+    npm init [-y]   初始化node.js项目,创建一个新的 package.json 文件的命令
+
+
+
+

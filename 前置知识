@@ -1,0 +1,42 @@
+CDN
+浏览器
+    发展史
+        IE
+        Fisafari    webkit         苹果
+        reFox       Gecko
+        Chromiun    webkit         谷歌
+        Chrome      Blink          谷歌
+        edge        Blink          微软
+    结构
+        用户界面    展示处用户标签页内容
+
+        浏览器引擎  传递数据
+                    数据持久层(cookie)
+
+        渲染引擎    渲染用户请求内容
+                    网络
+                    js解析器
+    运行
+        多进程浏览器结构
+            进程 
+                浏览器进程     地址栏，书签，窗口栏控制
+                网络进程       网络请求处理，safebrowsing检测恶意站点
+                渲染器进程     每个页面一个渲染器进程
+                GPU进程        整个页面渲染
+                缓存进程
+                插件进程   
+        dom tree         
+            结构处理 html解析为dom树并根据js代码修改dom
+            样式处理 ss确定dom树节点样式
+        layout tree
+            布局阶段 确定dom树节点位置
+        注：
+            1.dom tree和layout tree不一定是一一对应
+            2.dom tree 没有content:msg的节点(不是从html解析而来)
+            3.layout tree没有display:none节点
+            
+        layer tree
+            绘制记录表，遍历layout tree，确定不同层级的绘制顺序
+        合成器线程
+            对每个图层划分为图块，由栅格线程进行栅格化将结果存储在GPU内存中，产生合成器帧，通过IPC交给浏览器进程
+            

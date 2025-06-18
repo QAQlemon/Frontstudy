@@ -1,0 +1,33 @@
+双向绑定
+    vue3.4之前的替代方案（将ref绑定(v-bind)到子组件的prop+自定义事件通知触发父组件handle改变ref）：
+        <!-- Child.vue -->
+            <script setup>
+            const props = defineProps(['modelValue'])
+            const emit = defineEmits(['update:modelValue'])
+            </script>
+            <template>
+              <input
+                :value="props.modelValue"
+                @input="emit('update:modelValue', $event.target.value)"
+              />
+            </template>
+        <!-- Parent.vue -->
+            <Child
+              :modelValue="foo"
+              @update:modelValue="$event => (foo = $event)"
+            />
+    v-model
+        本质：只是一个语法糖，实际就是给组件定义了modelValue属性和监听update:modelValue事件
+    defineModel()
+        本质：defineModel 是一个便利宏。
+            声明了一个prop，并可以设置prop选项
+            定义一个事件
+
+自定义修饰符
+    let [model,modifier]=defineModel('',{
+        set(value){//value-值
+            if(modifier.xxx)//xxx是修饰符
+            ...
+        }
+    })
+    注：model名称不能用modelValue,最好取其他名称

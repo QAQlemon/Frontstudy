@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body{
+        border: 10px green dashed;
+        margin: 10px;
+    }
+    div{
+        width: 100px;
+        height: 100px;
+        border: 10px black dashed;
+        padding: 10px;
+        background: dimgray;
+        margin: 10px;
+        overflow: auto;
+    }
+    .eventInfo{
+        width: 350px;
+        height: 400px;
+        margin: 0;
+        position: fixed;
+        left: auto;
+        right: 0;
+        top: 0;
+    }
+    .keydownInfo{
+        width: 350px;
+        height: 400px;
+        margin: 0;
+        position: fixed;
+        left: auto;
+        right: 400px;
+        top: 0;
+    }
+    .mouseArea{
+        width: 350px;
+        height: 200px;
+    }
+    .keyArea{
+        width: 350px;
+        height: 200px;
+    }
+    .eventPropagation{
+        width: 300px;
+        height: 300px;
+    }
+</style>
+<body>
+    <div id="div1">1</div>
+    <div id="div2">2</div>
+    <div id="div3">3</div>
+    <div id="div4" class="mouseArea">鼠标事件检测区域</div>
+    <div id="div5" class="eventInfo">5</div>
+    <div id="div6" class="keyArea">
+        按键检测区域
+        <input type="text">
+    </div>
+    <div id="div7" class="keydownInfo">7</div>
+    <div id="div8" class="eventPropagation" onclick="eventPropagation(this)">
+        dv8
+        <div id="div8-2" style="width: 60%;height: 60%" onclick="eventPropagation(this)">
+            2
+            <div id="div8-1" style="width: 50%;height: 50%"  onclick="eventPropagation(this)">
+            1
+            </div>
+        </div>
+    </div>
+    <script>
+        let div1 = document.querySelector('#div1');
+        let clickCount=0
+        div1.onclick=()=>{
+            div1.innerHTML=`
+                被点击次数：${++clickCount}
+            `
+        }
+
+        let div2 = document.querySelector('#div2');
+        let div2Count=0
+        div2.onmouseover=()=>{
+            div2.innerHTML=`
+               移入次数：${++div2Count}
+            `
+        }
+        let div3 = document.querySelector('#div3');
+        let div3Count=0
+        div3.addEventListener('mouseover', ()=>{
+            div3.innerHTML=`
+                触发次数：${++div3Count}
+            `
+        })
+        div3.addEventListener('mouseleave', ()=>{
+            div3.innerHTML=`
+                触发次数：${++div3Count}
+            `
+        })
+
+
+        let div4 = document.querySelector('#div4');
+        let div5 = document.querySelector('#div5');
+        div4.addEventListener('mousemove',(event)=>{
+            div5.innerHTML=`
+                鼠标事件
+                <br>
+                ${event.type} type
+                <br>
+                ${event.eventPhase} eventPhase
+                <br>
+                目标
+                <br>
+                ${event.target} target
+                <br>
+                ${event.currentTarget} currentTarget
+                <br>
+                ${event.relatedTarget} relatedTarget
+                <br>
+                坐标
+                <br>
+                (${event.x},${event.y}) mouse(x,y)
+                <br>
+                (${event.clientX},${event.clientY}) client(x,y)
+                <br>
+                ${event.timeStamp} timeStamp
+                <br>
+            `
+        })
+
+        let div6 = document.querySelector('#div6');//按键区域
+        let div7 = document.querySelector('#div7');//显示区域
+        div6.addEventListener('keydown',(event)=>{
+            div7.innerHTML=`
+                按键事件<br>
+                ${event.type} type<br>
+                ${event.eventPhase} eventPhase<br>
+                目标<br>
+                ${event.target} target<br>
+                ${event.currentTarget} currentTarget<br>
+                按键<br>
+                ${event.key} key<br>
+                ${event.code} code<br>
+                ${event.shiftKey} shiftKey?<br>
+                ${event.ctrlKey} ctrlKey?<br>
+                ${event.metaKey} metaKey?<br>
+                ${event.repeat} repeat? 长按自动重复<br>
+                ${event.timeStamp} timeStamp<br>
+            `
+        })
+
+
+        let div8Count=0
+        function eventPropagation(e){
+            event.stopPropagation()
+            alert(`${e.id}:${++div8Count}`)
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+常用标签
+    html
+    head
+    title
+    body
+结构
+    h1-h6   head,头部, 标题, 常用于标题
+    p       段落,将整个网页分为若干个段落
+    br      换行
+    div     division,分割分区独占一行
+    span    跨度,跨距,一行可以放多个span标签
+    img     图片
+    a       anchor,链接
+
+文本格式化
+b   bold,加粗
+i   itlic,斜体
+s   subline,删除线
+u   unerline,下划线
+
+表格
+table   表格
+tr      行
+td      单元格，用于tr中
+th      表头，用于tr中
+
+列表
+ul  无序列表
+ol  有序列表
+    li  列表项，用于ul,ol
+dl  自定义列表
+    dt  列表头,用于dl
+    dd  列表项,用于dl
+
+表单标签
+form    定义表单
+input   输入框
+    text        默认文本
+    password    密码，不显示字符
+    submit      提交表单数据
+    button      普通按钮
+    file        文件上传
+    radio       单选框
+    checkbox    复习框
+    hidden      隐藏输入框
+    image       提交图片
+    reset       重置表单
+select  下拉框
+    option  下拉列表项，用于select
+textarea
+    文本域
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,64 @@
+effect
+依赖收集
+    主要工作：将观察者 Watcher 对象存放到当前闭包中的订阅者 Dep 的 subs 中
+    Dep发布者      sub用于存储watcher,追踪收集依赖
+    Watcher订阅者
+    getter 收集当前运行的副作用函数（例如组件的渲染函数）
+    setter 触发这些副作用函数
+触发更新
+副作用函数
+
+
+模拟一个简单响应式系统
+    //响应式对象
+    function reactive(obj) {
+      return new Proxy(obj, {
+        //依赖收集
+        get(target, key, receiver) {
+          track(target, key);
+          return Reflect.get(target, key, receiver);
+        },
+        //更新触发
+        set(target, key, value, receiver) {
+          const result = Reflect.set(target, key, value, receiver);
+          trigger(target, key);
+          return result;
+        }
+      });
+    }
+let targetMap = new WeakMap();
+
+function track(target, key) {
+  const effect = activeEffect;
+  if (!effect) return;
+
+  let depsMap = targetMap.get(target);
+  if (!depsMap) {
+    depsMap = new Map();
+    targetMap.set(target, depsMap);
+  }
+
+  let deps = depsMap.get(key);
+  if (!deps) {
+    deps = new Set();
+    depsMap.set(key, deps);
+  }
+   //收集副作用函数
+  deps.add(effect);
+}
+
+function trigger(target, key) {
+  const depsMap = targetMap.get(target);
+  if (!depsMap) return;
+
+  const deps = depsMap.get(key);
+  deps && deps.forEach(effect => effect());
+}
+
+let activeEffect = null;
+function effect(fn) {
+  activeEffect = fn;
+  fn(); // 执行函数，会触发 get，从而 track
+  activeEffect = null;
+}
+

@@ -1,0 +1,38 @@
+一.“组合式函数”(Composables)
+    利用 Vue 的组合式 API 来封装和复用有状态逻辑的函数
+二.自定义指令
+    一个自定义指令由一个包含类似组件生命周期钩子的对象来定义
+    在 <script setup> 中，任何以 v 开头的驼峰式命名的变量都可以当作自定义指令使用
+
+    eg:
+        <script setup>
+        // 在模板中启用 v-highlight
+        const vHighlight = {
+          mounted: (el) => {
+            el.classList.add('is-highlight')
+          }
+        }
+        </script>
+        <template>
+          <p v-highlight>This sentence is important!</p>
+        </template>
+三.插件
+    插件 (Plugins) 是一种能为 Vue 添加全局功能的工具代码
+    一个插件可以是一个拥有 install() 方法的对象（vue-router功能库）
+    eg:
+        const myPlugin = {
+          install(app, options) {
+            // 配置此应用
+          }
+        }
+        import { createApp } from 'vue'
+        const app = createApp({})
+        app.use(myPlugin, {
+          /* 可选的选项 */
+        })
+
+
+
+
+
+

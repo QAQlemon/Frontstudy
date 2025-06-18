@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>animation动画</title>
+</head>
+<style>
+    body{
+        border: 10px red dashed;
+        margin:0;
+    }
+    div{
+        width: 100px;
+        height: 100px;
+    }
+    .container{
+        position: relative;
+        width: 400px;
+        height: 400px;
+        border: cornflowerblue 10px dashed;
+    }
+    .animation{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-250%,-50%);
+        transition: all 1s;
+        background: #585bfd;
+
+
+        /*使用动画*/
+        animation: my_animation 2s infinite linear;
+
+    }
+    /*动画：关键帧*/
+    @keyframes my_animation{
+        /*设置 起点位置*/
+        0%{
+            transform:translate(-50%,-50%) translate(-50%,-50%);
+            /*transition: all 1s;*/
+        }
+        50%{
+            transform:translate(-100px,-50px) ;
+            /*background: cyan;*/
+        }
+        /*66%{*/
+        /*    transform: skewX(45deg);*/
+        /*    background: #fd7f00;*/
+        /*}*/
+        100%{
+            /*transform: scale(1) translate(100px,100px);*/
+            transform:translate(-50%,-50%) ;
+        }
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="animation">
+            animation
+        </div>
+    </div>
+
+
+</body>
+</html>

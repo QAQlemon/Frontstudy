@@ -1,0 +1,19 @@
+透传Attributes
+    注：单根节点组件才会自动透传，多根节点组件不会自动透传，如果 $attrs 没有被显式绑定，将会抛出一个运行时警告
+
+禁用Attributes继承
+    <script setup>
+        defineOptions({
+          inheritAttrs: false
+        })
+        // ...setup 逻辑
+    </script>
+
+查看当前组件的attr
+    $attrs
+        使用范围：模板内使用
+        作用：包含了除组件所声明的 props 和 emits 之外的所有其他 attribute
+    useAttrs()
+        使用范围：代码中使用
+
+

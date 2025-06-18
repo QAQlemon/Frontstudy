@@ -1,0 +1,23 @@
+一.单文件组件
+    简介：即 *.vue 文件，英文 Single-File Component，简称 SFC
+
+二.工具链
+    项目脚手架
+        vite    Vue 提供的官方脚手架工具,新一代前端构建工具
+                开发环境利用浏览器原生ES Modules
+                按需编译，无需打包整个应用
+                生产环境使用Rollup打包
+        vue cli 官方提供的基于 Webpack 的 Vue 工具链,处于维护模式。我们建议使用 Vite 开始新的项目
+                底层使用Webpack
+                提供预设配置，隐藏了Webpack的复杂性
+        Webpack 通用的 JavaScript 模块打包工具，功能强大但配置复杂
+                基于打包器架构
+                开发时需要打包整个应用
+                支持各种loader和plugin
+三.路由
+    参考 路由.txt
+四.状态管理
+    参考 状态管理.txt
+五.测试
+
+六.服务端渲染SSR

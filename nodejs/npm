@@ -1,0 +1,29 @@
+
+
+
+常用命令
+    //版本信息
+    npm -v
+
+    //初始化Node项目
+    npm init [-y]   初始化node.js项目,创建一个新的 package.json 文件的命令
+                    会根据 package.json 下载依赖
+                    -y 自动生成所有信息
+    //配置
+    npm config get prefix   全局安装地址
+    npm config get cache    缓存位置
+    npm config list         插卡配置信息
+
+    //查看包
+    npm {list|ls}
+
+    //安装
+    npm install [-g] xxx
+    npm uninstall xxx
+
+
+
+
+
+
+

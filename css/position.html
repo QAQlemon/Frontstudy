@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body{
+        height: 1800px;
+        width: 900px;
+        margin-left: 10px;
+    }
+    div{
+        border: red 10px dashed;
+        height: 400px;
+        padding: 0;
+        font-size: 10px;
+    }
+    #div1{
+        position: static;
+        left: 50px;
+        top: 50px;
+        /*width: 300px;*/
+    }
+    .pos{
+        border: 0;
+        width: 100px;
+        height: 100px;
+    }
+    .sticky{
+        background: #00fd4e;
+        position: sticky;
+        top: 10px;
+        left: 10px;
+        bottom: 10px;
+    }
+    .fixed{
+        background: aqua;
+        position: fixed;
+        top: 20px;
+        right: 0;
+    }
+    .absolute{
+        width: 50px;
+        height: 50px;
+        background: #6600ff;
+        position: absolute;
+        /*left: 0px;*/
+        /*top: 0px;*/
+        right: 25%;
+        bottom: 25%;
+        font-size: 10px;
+    }
+    .relative{
+        background: #bd26b5;
+        position: relative;
+        top: 0px;
+        left: 10px;
+        margin-left: 20px;
+        border: 10px black dashed;
+    }
+    #div2{
+        position: static;
+    }
+</style>
+<body>
+    <div id="div1">
+        <span>span</span>
+        <span>span</span>
+        <span>span</span>
+        <div class="pos sticky">sticky<br>未脱离文档流<div class="pos absolute">absolute<br>相对已定位父元素</div></div>
+        <span>span</span>
+        <div class="pos fixed">fixed<br>脱离文档流</div>
+        <span>span</span>
+        <div class="pos relative" onclick="alert('s')">relative<br>未脱离文档流</div>
+        <span>span</span>
+        <span>span</span>
+        <span>span</span>
+    </div>
+</body>
+</html>

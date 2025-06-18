@@ -1,0 +1,70 @@
+
+
+
+
+常见属性
+
+
+定位
+    当元素可以定位时,可指定：left,top,right,bottom
+    position
+         static       默认，基于文档流
+         relative     保留文档流的位置，基于文档流进行定位
+         absolute     脱离文档流，相对 已定位的父元素(非static) 进行定位
+         sticky       保留文档流的位置,相对 左上角窗口 定位,当到达阈值时显示出fixed特性
+         fixed        脱离文档流，相对 左上角窗口 定位
+选择器
+
+盒子模型
+    margin
+    border
+    padding
+浮动
+    简介：实现文字环绕的特效
+布局
+    正常布局
+        简介：在不对页面进行任何布局控制时，浏览器默认的 HTML 布局方式
+    display属性
+        简介：标准的 value，比如block, inline 或者 inline-block 元素在正常布局流中的表现形式，以及新的CSS Grid 和 Flexbox
+    flex弹性盒子
+        简介：
+        属性：
+            display:flex
+            align-items
+            justify-content
+            flex
+    grid网格
+        简介：
+        属性：
+            grid-template-columns:repeat(autofill,[px|%|fr])
+            grid-template-rows:repeat(autofill,[px|%|fr])
+    float浮动
+        简介：
+    position定位
+        简介：精准设置盒子中的盒子的位置，static,relative,absolute,fixed,sticky
+    CSS表格布局
+        简介：表格的布局方式可以用在非表格内容上
+    多列布局
+        简介：
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

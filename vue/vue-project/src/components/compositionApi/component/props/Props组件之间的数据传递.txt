@@ -1,0 +1,33 @@
+透传 attribute 属性的传递
+    简介：
+        用于父组件向子组件 单向传递 额外的属性(非props)，这些属性可能并不需要在子组件中使用，但可以在子组件内部进一步传递给其它子组件
+        除组件所声明的 props 和 emits 之外的所有其他 attribute，会和从父组件上继承的值合并
+        例子 class style 和 id
+    禁用 Attributes 继承：
+        defineOptions({
+          inheritAttrs:false//关闭属性继承
+        })
+    获取当前组件的属性：
+        模板中             $attrs
+        <script setup>中  useAttrs
+
+props
+    简介：用于父组件向子组件 单向传递 数据，子组件中可以使用这些数据进行渲染或其他操作
+    声明props：
+        <script setup>中 defineProps({key_props:type})
+    父组件向子组件传递数据：
+        <child :key_props="xxx">
+    通过对象绑定多个属性
+        let obj={xxx:xxx,...}
+        <child v-bind="obj">//能将obj对象的所有属性绑定到attrs上
+    props校验
+        只是在不符合的情况下在控制台输出警告,但还是能需修改
+
+
+
+
+
+
+
+
+

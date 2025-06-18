@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body{
+        /*width: 600px;*/
+        /*height: 600px;*/
+        border: 10px red dashed;
+        overflow: auto;
+        margin: 0;
+        margin-left: 10px;
+    }
+    div{
+        width: 200px;
+        height: 200px;
+        border: 10px black dashed;
+    }
+    .dragArea{
+        width: 500px;
+        height: 500px;
+        border: 10px black dashed;
+    }
+    .dragObj{
+        width: 300px;
+        height: 300px;
+        border: 10px aqua solid;
+        background: bisque;
+        padding: 10px;
+        /*text-align: center;*/
+        /*align-content: center;*/
+        horiz-align: center;
+        vertical-align: middle;
+        /*margin-left: 10px;*/
+    }
+    .inline{
+        display: inline-block;
+        background: darkseagreen;
+    }
+    .block{
+        display: block;
+        background: chartreuse;
+    }
+</style>
+<body>
+    <div>1</div>
+    <div id="div1" class="dragArea">
+        <div id="div1-1" class="dragObj">
+<!--            <span class="inline">inline</span>-->
+<!--            <span class="block">block</span>-->
+<!--            <span class="inline">inline</span>-->
+<!--            <span class="block">block</span>-->
+<!--            <span class="inline">inline</span>-->
+<!--            <span class="inline">inline</span>-->
+        </div>
+    </div>
+    <script>
+        let dragArea = document.querySelector('#div1');
+        let dragObj = document.querySelector('#div1-1');
+        dragObj.addEventListener('mousedown',(event)=>{
+            let rect = dragObj.getBoundingClientRect();
+            dragObj.innerHTML=`
+                >>1.元素<br>
+                >offset(left,top) 整个html页面<br>
+                ${dragObj.offsetLeft},${dragObj.offsetTop}<br>
+                >client border左上角<br>
+                ${dragObj.clientLeft},${dragObj.clientTop}<br>
+                >scroll 父元素<br>
+                ${dragObj.scrollLeft},${dragObj.scrollTop}<br>
+
+                >>2.元素-相对窗口 get<br>
+                >rect(x,y) 相对窗口<br>
+                ${rect.x},${rect.y}<br>
+
+                >>3.事件<br>
+                >event(x,y) 窗口<br>
+                ${event.x},${event.y}<br>
+                >event(clientX,clientY) 窗口<br>
+                ${event.clientX},${event.clientY}<br>
+                >event(pageX,pageY) 整个html页面<br>
+                ${event.pageX},${event.pageY}<br>
+            `
+
+        })
+
+
+    </script>
+</body>
+</html>

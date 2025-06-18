@@ -1,0 +1,15 @@
+组件的注册
+    全局注册
+        // 1.创建app应用实例（可创建应用实例）
+        // 注：在需要 Vue 去控制一个大型页面中特殊的一小部分时，可以创建出多个小的app应用实例
+        const app = createApp(App)
+        // 2.注册一个组件（全局）
+        // 注：全局注册了一个组件，即使没有被实际使用，仍然会出现在打包后的 JS 文件中
+        app.component('global_component',Global_component)
+        // 3.挂载组件到index.html中
+        // 注：挂载需要写在最后，才能使上面的各项配置生效
+        app.mount('#app')
+    局部注册
+        <script setup>
+            import Local_component from "@/components/compositionApi/component/register/local_component.vue";
+        </script>
