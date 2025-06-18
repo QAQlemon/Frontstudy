@@ -1,16 +1,29 @@
 import {defineStore} from "pinia";
 
 export const useCounter1=defineStore('counter1',{
-    state: () => ({
-        count: 0,
+    state: () =>({
+        count: 1,
         name: 'Eduardo'
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
+        upCaseMsg:(state)=>{
+            return  ((msg)=>{
+                return `${state.name.toUpperCase()}:${msg}`
+            });
+        },
+        //出现错误
+        //注意：getter之间的组合使用不要用属性赋值的方式否则调用失败
+        // sss:(state)=>{
+        //     return this.doubleCount
+        // }
+        callOtherGetter(state){
+            return this.doubleCount
+        }
     },
     actions: {
         increment() {
-            this.count++
+            this.count+=this.callOtherGetter
         },
     },
 })

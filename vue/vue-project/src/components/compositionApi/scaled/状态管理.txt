@@ -6,34 +6,128 @@
         一个拥有组合式 API 的 Vue 状态管理库
 
 pinia
-    核心：state + getter + action
-
+    核心：
+        store = state + getter + action
     定义Store
-        api:
-            创建Store
-                defineStore('',{
-                    state:()=>{
-
-                    },
-                    getters:{
-
-                    },
-                    actions:{
-
+        api：
+            store = defineStore()
+        创建Store
+            defineStore('',{
+                state:()=>{
+                    return {
+                        count:0
+                        name:'dio'
                     }
-                })
-                defineStore('',()=>{})
-            使用Store
-                const store = useCounterStore()
-                注：返回reactive对象，不要对store使用解构，解构得到的变量的响应式已被破坏
-            从Store解构
-                const store = useCounterStore()
+                },
+                //$reset()
+                //  默认：会调用state()方法重置state数据
+                //  自定义：可以通过自行实现覆盖已有的默认$reset()
+                $reset:()={...}
+                getters:{},//尽量不要使用属性绑定lambda的方式，可能无法通过this进行state,getter,action的访问
+                actions:{}
+            })
+            defineStore('',()=>{
+                const count=ref(0)
+                function $reset(){
 
+                }
+                return {xxx,xxx}
+            })
+        使用Store
+            const store = useCounterStore()
+        从Store解构
+            注：返回reactive对象，不要对store使用解构，解构得到的变量的响应式已被破坏
+            const store = useCounterStore()
+            let {xx,xx}=storeToRefs(stores)
     State
+        简介：
+            state属性 == 选项式data属性 == 组合式的ref()
+        访问state
+            store = useStore()  //获取reactive对象
+            store.count         //直接访问
+        重置state
+            store.$reset()      //在 $reset() 内部，会调用 state() 函数来创建一个新的状态对象
+        变更state
+            store.count++       //直接修改
+            store.$patch({              //通过对象批量修改
+                count: store.count+1,
+                name: 'DIO'
+            })
+            store.$patch((state)=>{     //推荐使用
+                state.count++
+                state.name='DIO'
+            })
+        替换state
+            // 这实际上并没有替换`$state`
+            store.$state = { count: 24 }
+            // 在它内部调用 `$patch()`：
+            store.$patch({ count: 24 })
+        订阅state
+            简介：
+                类似于 Vuex 的 subscribe 方法
+            eg:
+                store.$subscribe((mutation,state)=>{
+                    //patch修改类型：直接 补丁对象 函数
+                    // 'direct' | 'patch object' | 'patch function'
+                    mutation.type
 
+                    //store.$id
+                    mutation.storeId
+
+                    //传递给 cartStore.$patch() 的补丁对象
+                    //注：只有 mutation.type === 'patch object'的情况下才可用
+                    mutation.payload
+                })
+        state订阅自动删除
+            简介：
+                默认情况下，state subscription 会被绑定到添加它们的组件上 (如果 store 在组件的 setup() 里面)
+                即：默认情况下，当该组件被卸载时，将被自动删除，但是可选择为不删除
+            防止自动删除：
+                store.$subscribe(callback,
+                    {
+                        detached:true
+                    }
+                )
     Getter
-
+        简介：
+            getters属性 ==  选项式computed属性 == 组合式的computed()
+        getter组合使用
+            export const useCounterStore = defineStore('counter', {
+                state: () => ({
+                    count: 0,
+                }),
+                getters: {
+                    // 自动推断出返回类型是一个 number
+                    doubleCount(state) {
+                        return state.count * 2
+                    },
+                    // 返回类型**必须**明确设置
+                    doublePlusOne(){
+                        // getter之间可以组合使用
+                        return this.doubleCount + 1
+                    },
+                },
+            })
+        getter传参使用
+            关键：getter无法传参，但可以通过getter返回一个带参数的函数实现同样的效果
     Action
+        简介：
+            actions属性 == 选项式methods属性 == 组合式的computed()
 
+        订阅Action
+            store.$onAction(
+                (param)=>{
+                    param.name
+                    param.args
+                    param.store
+                    //action执行成功后的回调处理
+                    param.after((res)=>{
 
+                    })
+                    //异常处理
+                    param.onError((error)=>{
+
+                    })
+                }, true
+            )
 

@@ -61,6 +61,7 @@ router.beforeResolve(to => {// 全局解析守卫
 })
 router.afterEach(to => {// 全局后置钩子
     console.log("global route:afterEach "+to.path)
+
 })
 app.use(router)
 
